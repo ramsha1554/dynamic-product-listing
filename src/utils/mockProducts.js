@@ -2,6 +2,8 @@ import smartWatch from '../assets/products/smart-watch.png';
 import headphones from '../assets/products/headphones.png';
 import ring from '../assets/products/ring.png';
 import summerDress from '../assets/products/summer-dress.png';
+import navySuit from '../assets/products/navy-suit.png';
+import leatherJacket from '../assets/products/leather-jacket.png';
 
 export const mockProducts = [
   {
@@ -39,5 +41,23 @@ export const mockProducts = [
     category: "women's clothing",
     image: summerDress,
     rating: { rate: 4.5, count: 110 }
+  },
+  {
+    id: 105,
+    title: "Classic Navy Slim-Fit Suit",
+    price: 18999,
+    description: "A sharp, modern silhouette for the discerning gentleman. Made from premium wool blend fabric, perfect for weddings, business, or formal events.",
+    category: "men's clothing",
+    image: navySuit,
+    rating: { rate: 4.8, count: 64 }
+  },
+  {
+    id: 106,
+    title: "Vintage Brown Leather Jacket",
+    price: 14500,
+    description: "Timeless style meets rugged durability. Hand-treated genuine leather with a soft inner lining, designed to get better with age.",
+    category: "men's clothing",
+    image: leatherJacket,
+    rating: { rate: 4.7, count: 92 }
   }
 ];

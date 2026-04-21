@@ -23,7 +23,11 @@ function App() {
         fetchProducts(),
         fetchCategories()
       ]);
-      setProducts([...productsData, ...mockProducts]);
+      const normalizedProducts = productsData.map(p => ({
+        ...p,
+        price: Math.round(p.price * 82) // Roughly converting USD to INR
+      }));
+      setProducts([...normalizedProducts, ...mockProducts]);
       setCategories(['all', ...categoriesData]);
     } catch (err) {
       setError(err.message || 'Failed to connect to the server.');
