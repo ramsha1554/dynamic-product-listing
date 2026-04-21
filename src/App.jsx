@@ -4,6 +4,7 @@ import ProductList from './components/ProductList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
 import { fetchProducts, fetchCategories } from './services/api';
+import { mockProducts } from './utils/mockProducts';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -22,7 +23,7 @@ function App() {
         fetchProducts(),
         fetchCategories()
       ]);
-      setProducts(productsData);
+      setProducts([...productsData, ...mockProducts]);
       setCategories(['all', ...categoriesData]);
     } catch (err) {
       setError(err.message || 'Failed to connect to the server.');
