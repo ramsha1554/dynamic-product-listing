@@ -6,6 +6,8 @@ import ErrorMessage from './components/ErrorMessage';
 import { fetchProducts, fetchCategories } from './services/api';
 import { mockProducts } from './utils/mockProducts';
 
+import { sortProducts } from './utils/sorting';
+
 function App() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -45,11 +47,9 @@ function App() {
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
-  }).sort((a, b) => {
-    if (sortBy === 'price-low') return a.price - b.price;
-    if (sortBy === 'price-high') return b.price - a.price;
-    return 0; // 'relevant' (default API order)
   });
+
+  const sortedAndFilteredProducts = sortProducts(filteredProducts, sortBy);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -86,6 +86,9 @@ function App() {
               <option value="relevant">Default Sorting</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+              <option value="name-az">Name: A to Z</option>
+              <option value="name-za">Name: Z to A</option>
             </select>
           </div>
         </div>
@@ -100,10 +103,10 @@ function App() {
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-2xl font-black text-slate-800">
                 {selectedCategory === 'all' ? 'Featured Products' : `${selectedCategory}`}
-                <span className="ml-3 text-sm font-medium text-slate-400">({filteredProducts.length} results)</span>
+                <span className="ml-3 text-sm font-medium text-slate-400">({sortedAndFilteredProducts.length} results)</span>
               </h2>
             </div>
-            <ProductList products={filteredProducts} />
+            <ProductList products={sortedAndFilteredProducts} />
           </>
         )}
       </main>
